@@ -20,6 +20,20 @@ const hard = generateLevel('2026-10-19', 2);
 assert.equal(hard.tiles.length, 135);
 assert.deepEqual([0,1,2].map(layer => hard.tiles.filter(t => t.layer === layer).length), [45,54,36]);
 for (const kind of ICONS) assert.equal(hard.tiles.filter(t => t.kind === kind).length % 3, 0);
+const layerOffsets = [1,2].map(layer => {
+  const lower = hard.tiles.filter(t => t.layer === layer - 1);
+  const higher = hard.tiles.filter(t => t.layer === layer);
+  return higher.map(tile => {
+    const match = lower.map(t => ({t,d:Math.hypot(t.x-tile.x,t.y-tile.y)})).sort((a,b)=>a.d-b.d)[0];
+    return {dx:+(tile.x-match.t.x).toFixed(2),dy:+(tile.y-match.t.y).toFixed(2)};
+  });
+});
+for (const offsets of layerOffsets) {
+  assert.ok(offsets.some(o => Math.abs(o.dx)<.05 && Math.abs(o.dy)<.05), 'some cards should stack centered');
+  assert.ok(offsets.some(o => Math.abs(o.dx)>.1 && Math.abs(o.dy)<.05), 'some cards should shift sideways');
+  assert.ok(offsets.some(o => Math.abs(o.dx)<.05 && Math.abs(o.dy)>.1), 'some cards should shift vertically');
+  assert.ok(offsets.some(o => Math.abs(o.dx)>.1 && Math.abs(o.dy)>.1), 'some cards should cross stagger');
+}
 const cells = hard.tiles.map(t => `${t.layer}:${Math.round(t.x)}:${Math.round(t.y)}`);
 assert.equal(new Set(cells).size, 135);
 const minX = Math.min(...hard.tiles.map(t => t.x)), maxX = Math.max(...hard.tiles.map(t => t.x));
