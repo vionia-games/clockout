@@ -20,7 +20,7 @@ const hard = generateLevel('2026-10-19', 2);
 assert.equal(hard.tiles.length, 135);
 assert.deepEqual([0,1,2].map(layer => hard.tiles.filter(t => t.layer === layer).length), [45,54,36]);
 for (const kind of ICONS) assert.equal(hard.tiles.filter(t => t.kind === kind).length % 3, 0);
-const cells = hard.tiles.map(t => `${Math.round(t.x)}:${Math.round(t.y)}`);
+const cells = hard.tiles.map(t => `${t.layer}:${Math.round(t.x)}:${Math.round(t.y)}`);
 assert.equal(new Set(cells).size, 135);
 const minX = Math.min(...hard.tiles.map(t => t.x)), maxX = Math.max(...hard.tiles.map(t => t.x));
 const minY = Math.min(...hard.tiles.map(t => t.y)), maxY = Math.max(...hard.tiles.map(t => t.y));
