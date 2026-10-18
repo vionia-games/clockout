@@ -9,6 +9,9 @@ const { generateLevel, isFree, ICONS } = logic;
 
 const easy = generateLevel('2026-10-19', 1);
 assert.equal(easy.tiles.length, 18);
+assert.deepEqual([easy.cols,easy.rows],[10,8]);
+assert.ok(Math.max(...easy.tiles.map(t=>t.x))-Math.min(...easy.tiles.map(t=>t.x))<2.2, 'tutorial cards should stay clustered');
+assert.ok(Math.abs((Math.max(...easy.tiles.map(t=>t.x))+Math.min(...easy.tiles.map(t=>t.x)))/2+.5-easy.cols/2)<.2, 'tutorial stack should be centered');
 assert.equal(easy.tiles.filter(t => t.layer === 0).length, 9);
 assert.equal(easy.tiles.filter(t => t.layer === 1).length, 9);
 assert.equal(new Set(easy.tiles.map(t => t.kind)).size, 3);
@@ -18,6 +21,8 @@ assert.ok(3 * 2 < 7);
 
 const hard = generateLevel('2026-10-19', 2);
 assert.equal(hard.tiles.length, 135);
+assert.deepEqual([hard.cols,hard.rows],[11,10]);
+assert.ok(Math.max(...hard.tiles.map(t=>t.x))-Math.min(...hard.tiles.map(t=>t.x))<7.5, 'hard cards should form a compact central mound');
 assert.deepEqual([0,1,2,3].map(layer => hard.tiles.filter(t => t.layer === layer).length), [36,36,36,27]);
 assert.equal(Math.max(...hard.tiles.map(t => t.layer)), 3);
 assert.ok(hard.tiles.some(t => t.layer === 0 && hard.tiles.some(top => top.layer === 3 && Math.abs(t.x-top.x)<.89 && Math.abs(t.y-top.y)<.89)), 'the fourth layer must overlap the base stack');
