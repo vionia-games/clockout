@@ -8,7 +8,8 @@
     "build:web": "tsc --noEmit && vite build",
     "build": "ait build",
     "preview": "vite preview --host 0.0.0.0",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:logic": "node scripts/verify-levels.mjs"
   },
   "dependencies": {
     "@apps-in-toss/web-framework": "latest",
