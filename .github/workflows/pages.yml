@@ -27,6 +27,8 @@ jobs:
           node-version: '22'
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Verify puzzle logic
+        run: npm run test:logic
       - name: Build web game
         run: npm run build:web
       - uses: actions/configure-pages@v5
