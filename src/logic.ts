@@ -16,30 +16,25 @@ export function isFree(tile:Tile, remaining:Tile[]):boolean {
   return !remaining.some(t=>t.id!==tile.id && t.layer>tile.layer && Math.abs(t.x-tile.x)<.89 && Math.abs(t.y-tile.y)<.89);
 }
 const readRows=(rows:string[], ox=0, oy=0) => rows.flatMap((row,y)=>[...row].flatMap((cell,x)=>cell==='#'?[{x:x+ox,y:y+oy}]:[]));
-const FILE_MOUND=readRows([
-  '....####....',
-  '..######....',
-  '.####.###...',
-  '##.####.##..',
-  '.###.####...',
-  '..######....',
-  '...#######..'
-]);
-const SIDE_FILES=[{x:-1,y:3},{x:-1,y:4},{x:-1,y:5},{x:10,y:2},{x:10,y:3},{x:10,y:4},{x:4,y:7},{x:5,y:7},{x:6,y:7}];
-const TOP_FILES=[...FILE_MOUND.slice(0,27),...SIDE_FILES.slice(0,9)];
+const MOUND_LAYERS=[
+  readRows(['.######.','########','########','########','..####..','...##...']),
+  readRows(['...##...','..####..','.######.','########','##.#####','..####..','...#####']),
+  readRows(['...#....','..###...','.#####..','#######.','########','.######.','..####..','...##...']),
+  readRows(['...##...','..####..','.######.','########','...###..','..####..'])
+];
 function officeMound():Array<Omit<Tile,'kind'>> {
-  const base=FILE_MOUND;
-  const middle=[...base,...SIDE_FILES];
-  const top=TOP_FILES;
   const zero={x:0,y:0}, right={x:.32,y:0}, down={x:0,y:.32}, cross={x:-.32,y:.32};
-  const offsetsByLayer=[[zero,zero,zero,zero,zero,zero,zero,zero],[zero,right,down,cross,zero,zero,zero,right],[zero,zero,zero,zero,right,down,cross,right]];
-  const place=(points:Array<{x:number;y:number}>,layer:number,start:number)=>points.map((p,i)=>{
-    // Each layer alternates centered, side-shifted, and cross-staggered cards.
-    // The maximum inter-layer offset is under the .89 occlusion radius.
-    const shift=offsetsByLayer[layer][i%8];
-    return {id:start+i,layer,x:p.x+2+shift.x,y:p.y+shift.y};
-  });
-  return [...place(base,0,0),...place(middle,1,base.length),...place(top,2,base.length+middle.length)];
+  const patterns=[[zero,zero,zero,zero,zero,zero,zero,zero],
+    [zero,right,down,cross,zero,zero,zero,right],
+    [zero,zero,zero,zero,right,down,cross,right],
+    [zero,right,down,cross,zero,zero,zero,right]];
+  let id=0;
+  return MOUND_LAYERS.flatMap((points,layer)=>points.map((p,i)=>{
+    // Four compact, irregular layers create the challenge through depth.
+    // Card offsets remain within the occlusion radius, preserving the solution path.
+    const shift=patterns[layer][i%8];
+    return {id:id++,layer,x:p.x+1+shift.x,y:p.y+shift.y};
+  }));
 }
 export function generateLevel(date:string,stage:number):Level {
   const hard=stage===2;
@@ -60,13 +55,13 @@ export function generateLevel(date:string,stage:number):Level {
   }
   const positions=officeMound();
   const assigned=new Map<number,Icon>(),solution:number[][]=[];
-  for(const layer of [2,1,0]){
+  for(let layer=3;layer>=0;layer--){
     const pool=shuffle(positions.filter(p=>p.layer===layer),rand);
     for(let i=0;i<pool.length;i+=3){
       const group=pool.slice(i,i+3),kind=ICONS[Math.floor(rand()*ICONS.length)];
       group.forEach(p=>assigned.set(p.id,kind));solution.push(group.map(p=>p.id));
     }
   }
-  return {stage,cols:14,rows:8,total:positions.length,tiles:positions.map(p=>({...p,kind:assigned.get(p.id)!})),solution};
+  return {stage,cols:10,rows:9,total:positions.length,tiles:positions.map(p=>({...p,kind:assigned.get(p.id)!})),solution};
 }
 export function formatTime(seconds:number):string {return `${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;}
