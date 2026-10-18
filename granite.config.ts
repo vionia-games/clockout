@@ -1,12 +1,12 @@
 import { defineConfig } from '@apps-in-toss/web-framework/config';
 
-// IMPORTANT: Change appName and icon to match the exact values in your Apps in Toss Console.
+// In Toss Console, register this appName and upload its icon.
+// The installed SDK's "brand" type currently accepts only primaryColor.
+// Display name and icon are managed in Toss Console, not here.
 export default defineConfig({
   appName: 'clockout',
   brand: {
-    displayName: '칼퇴하자!',
     primaryColor: '#A677D5',
-    icon: '', // Replace with the image URL copied from the Toss Console application icon.
   },
   web: {
     host: 'localhost',
