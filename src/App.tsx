@@ -16,22 +16,96 @@ function initial(day:string,stage=1,seconds=0,moves=0):State {
  const level=generateLevel(day,stage);
  return {day,stage,level,tiles:level.tiles,tray:[],matched:0,moves,seconds,status:'playing',history:[],hint:[],help:get(HELP_KEY)!=='yes',shuffled:false,record:Number(get(REC_PREFIX+day))||null};
 }
-const palette:Record<Icon,string>={coffee:'#bd87dd',headphones:'#8e8ae6',bag:'#e9a271',phone:'#75afd6',bus:'#6fa9cf',laptop:'#897de2',clock:'#e89ab0',folder:'#e69caf',key:'#8db4ce'};
-const names:Record<Icon,string>={coffee:'커피',headphones:'헤드폰',bag:'가방',phone:'휴대폰',bus:'버스',laptop:'노트북',clock:'알람시계',folder:'파일 폴더',key:'열쇠'};
+const names:Record<Icon,string>={coffee:'고양이 나비',headphones:'강아지 몽이',bag:'토끼 뭉치',phone:'곰돌이 쿠키',bus:'병아리 삐약',laptop:'개구리 초롱',clock:'판다 두부',folder:'아기 여우 루루',key:'햄스터 콩이'};
 
 function TileIcon({kind}: {kind:Icon}){
- const shape:Record<Icon,React.ReactNode>={
-  coffee:<g><path d="M5 9h13v5a6.5 6.5 0 0 1-13 0V9Z"/><path d="M18 10h2.4a2.1 2.1 0 0 1 0 4.2H18M5 21h15M9 3v3M14 3v3"/></g>,
-  headphones:<g><path d="M4.2 14V12a7.8 7.8 0 0 1 15.6 0v2"/><rect x="3.2" y="12.5" width="4.4" height="7.2" rx="2"/><rect x="16.4" y="12.5" width="4.4" height="7.2" rx="2"/></g>,
-  bag:<g><rect x="4" y="8" width="16" height="13" rx="2.5"/><path d="M9 8V6a3 3 0 0 1 6 0v2M4 13h16M10 13v2h4v-2"/></g>,
-  phone:<g><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10 5h4M11.5 18h1"/></g>,
-  bus:<g><path d="M4 17V7q0-3 4-3h8q4 0 4 3v10H4Z" fill="#8fc9e9" stroke="#4c7898"/><path d="M7 7h10v5H7z" fill="#eafaff" stroke="#4c7898"/><path d="M9 8v3m6-3v3" stroke="#78badc"/><circle cx="8" cy="17" r="2" fill="#544765"/><circle cx="16" cy="17" r="2" fill="#544765"/><path d="M6 14h12" stroke="#fff"/></g>,
-  laptop:<g><rect x="5" y="4" width="14" height="12" rx="2" fill="#a99aea" stroke="#6d5ca5"/><rect x="7" y="6" width="10" height="8" rx="1" fill="#ddf5ff" stroke="#fff"/><path d="m3 19 2-3h14l2 3q0 1-2 1H5q-2 0-2-1Z" fill="#7971ba" stroke="#61558f"/><circle cx="12" cy="10" r="1" fill="#f5c962"/></g>,
-  clock:<g><path d="m7 4-2-2m14 2 2-2" stroke="#9c70b3" strokeWidth="2.5"/><circle cx="12" cy="13" r="8" fill="#ffdf7c" stroke="#b27a52"/><circle cx="9" cy="12" r=".8" fill="#57435e"/><circle cx="15" cy="12" r=".8" fill="#57435e"/><path d="M9 16q3 2 6 0M12 8v4l2 1" fill="none" stroke="#76516d" strokeWidth="1.4" strokeLinecap="round"/></g>,
-  folder:<g><path d="M3 7q0-2 2-2h5l2 2h7q2 0 2 2v9q0 2-2 2H5q-2 0-2-2Z" fill="#edacc3" stroke="#a9658f"/><path d="M4 10h16" stroke="#ffebf1" strokeWidth="2"/><path d="M7 13h9m-9 3h6" stroke="#b9789d"/></g>,
-  key:<g><circle cx="8" cy="9" r="4"/><path d="m11 12 8 8M15 16l2.5-2.5M17 18l2.5-2.5"/></g>
+ const outline="#624b70";
+ const face:Record<Icon,React.ReactNode>={
+  coffee:<g stroke={outline} strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round">
+   <path d="M13 25 11 10q0-4 4-2l12 9q5-2 10 0L49 8q4-2 4 3l-2 16q2 23-19 26Q11 52 13 25Z" fill="#ffd9a8"/>
+   <path d="m14 19-1-9 11 8m27 1 1-10-11 9" fill="#f6a4bd" strokeWidth="2"/>
+   <ellipse cx="24" cy="31" rx="2.3" ry="3.2" fill={outline} stroke="none"/><ellipse cx="40" cy="31" rx="2.3" ry="3.2" fill={outline} stroke="none"/>
+   <circle cx="21" cy="29" r=".8" fill="white" stroke="none"/><circle cx="37" cy="29" r=".8" fill="white" stroke="none"/>
+   <path d="m30 36 2 1.5 2-1.5m-2 2v3m0 0q-3 3-6 0m6 0q3 3 6 0" fill="none" strokeWidth="1.8"/>
+   <circle cx="18" cy="37" r="3.6" fill="#f29eb5" stroke="none"/><circle cx="46" cy="37" r="3.6" fill="#f29eb5" stroke="none"/>
+   <path d="M10 34 3 32m8 5-7 1m50-4 7-2m-8 5 7 1" fill="none" strokeWidth="1.4"/>
+   <path d="M22 14q8-7 16 0" fill="none" stroke="#fff4db" strokeWidth="2"/>
+  </g>,
+  headphones:<g stroke={outline} strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round">
+   <path d="M16 21Q5 23 8 39q2 7 10 4l3-14Zm32 0q11 2 8 18-2 7-10 4l-3-14Z" fill="#c58b66"/>
+   <path d="M14 31q0-19 18-19t18 19v9q-1 13-18 14Q14 53 14 40Z" fill="#f6d7ad"/>
+   <path d="M14 27q3-15 18-15t18 15" fill="none" stroke="#a56f89" strokeWidth="3"/>
+   <ellipse cx="24" cy="33" rx="2.2" ry="3" fill={outline} stroke="none"/><ellipse cx="40" cy="33" rx="2.2" ry="3" fill={outline} stroke="none"/>
+   <ellipse cx="32" cy="39" rx="7" ry="5" fill="#fff2e5" strokeWidth="1.8"/><path d="m30 37 2 1.5 2-1.5m-2 2v2m0 0q-3 2-5 0m5 0q3 2 5 0" fill="none" strokeWidth="1.6"/>
+   <circle cx="19" cy="39" r="3" fill="#f29eb5" stroke="none"/><circle cx="45" cy="39" r="3" fill="#f29eb5" stroke="none"/>
+   <path d="M24 19q8-5 16 0" fill="none" stroke="#fff0d7" strokeWidth="2"/>
+  </g>,
+  bag:<g stroke={outline} strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round">
+   <path d="M22 27 18 6q-1-5 4-3l11 18Zm20 0 4-21q1-5-4-3L31 22Z" fill="#ffbfd7"/>
+   <path d="M17 29Q17 17 32 17t15 12l2 10q1 15-17 16-18-1-17-16Z" fill="#fff0f5"/>
+   <path d="M22 8 29 23M42 8l-8 15" stroke="#f18eb2" strokeWidth="2"/>
+   <ellipse cx="25" cy="34" rx="2.2" ry="3" fill={outline} stroke="none"/><ellipse cx="39" cy="34" rx="2.2" ry="3" fill={outline} stroke="none"/>
+   <path d="m29 40 3 2 3-2m-3 2v3m0 0q-4 3-7 0m7 0q4 3 7 0" fill="none" strokeWidth="1.7"/>
+   <circle cx="20" cy="41" r="3.4" fill="#f39fbb" stroke="none"/><circle cx="44" cy="41" r="3.4" fill="#f39fbb" stroke="none"/>
+   <path d="m27 16 5-7 5 7-5 3Z" fill="#ffdc72"/><circle cx="32" cy="14" r="2" fill="#fff4b9" stroke="none"/>
+  </g>,
+  phone:<g stroke={outline} strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round">
+   <circle cx="18" cy="18" r="8" fill="#b77a58"/><circle cx="46" cy="18" r="8" fill="#b77a58"/>
+   <circle cx="18" cy="18" r="3.7" fill="#f5b1b2" strokeWidth="1.5"/><circle cx="46" cy="18" r="3.7" fill="#f5b1b2" strokeWidth="1.5"/>
+   <path d="M14 32Q14 17 32 17t18 15v8q-1 14-18 14-17 0-18-14Z" fill="#d69a73"/>
+   <ellipse cx="25" cy="34" rx="2.2" ry="3" fill={outline} stroke="none"/><ellipse cx="39" cy="34" rx="2.2" ry="3" fill={outline} stroke="none"/>
+   <ellipse cx="32" cy="41" rx="8" ry="6" fill="#fff2e5" strokeWidth="1.7"/><path d="m30 39 2 1.5 2-1.5m-2 2v2m0 0q-3 2-5 0m5 0q3 2 5 0" fill="none" strokeWidth="1.5"/>
+   <circle cx="20" cy="40" r="3.5" fill="#f29eb5" stroke="none"/><circle cx="44" cy="40" r="3.5" fill="#f29eb5" stroke="none"/>
+   <path d="M22 23q10-6 20 0" fill="none" stroke="#efc49b" strokeWidth="2"/>
+  </g>,
+  bus:<g stroke={outline} strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round">
+   <path d="M26 16q-1-9 6-12 7 3 6 12" fill="#ffce58"/>
+   <path d="M13 31q0-17 19-17t19 17v8q0 15-19 15T13 39Z" fill="#ffe477"/>
+   <path d="M19 21q6-5 13-5t13 5" fill="none" stroke="#fff1ac" strokeWidth="3"/>
+   <ellipse cx="25" cy="34" rx="2.2" ry="3" fill={outline} stroke="none"/><ellipse cx="39" cy="34" rx="2.2" ry="3" fill={outline} stroke="none"/>
+   <path d="m29 40 3 2 3-2" fill="none" strokeWidth="1.8"/>
+   <path d="m30 39-5 3 5 2 2-2 2 2 5-2-5-3" fill="#f28e72" strokeWidth="1.5"/>
+   <circle cx="20" cy="41" r="3.4" fill="#f39fbb" stroke="none"/><circle cx="44" cy="41" r="3.4" fill="#f39fbb" stroke="none"/>
+   <circle cx="21" cy="26" r="2" fill="#fff6c4" stroke="none"/><circle cx="45" cy="26" r="2" fill="#fff6c4" stroke="none"/>
+  </g>,
+  laptop:<g stroke={outline} strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round">
+   <path d="M12 30Q12 16 24 16q4-9 8-9t8 9q12 0 12 14v9q-1 15-20 15-19 0-20-15Z" fill="#91dca6"/>
+   <circle cx="23" cy="18" r="7" fill="#a8ebb7"/><circle cx="41" cy="18" r="7" fill="#a8ebb7"/>
+   <ellipse cx="23" cy="34" rx="2.2" ry="3" fill={outline} stroke="none"/><ellipse cx="41" cy="34" rx="2.2" ry="3" fill={outline} stroke="none"/>
+   <path d="M25 42q7 6 14 0" fill="none" strokeWidth="2"/>
+   <circle cx="18" cy="41" r="3.4" fill="#f39fbb" stroke="none"/><circle cx="46" cy="41" r="3.4" fill="#f39fbb" stroke="none"/>
+   <circle cx="21" cy="16" r="2" fill="#fff" stroke="none"/><circle cx="39" cy="16" r="2" fill="#fff" stroke="none"/>
+  </g>,
+  clock:<g stroke={outline} strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round">
+   <circle cx="17" cy="19" r="9" fill="#594d67"/><circle cx="47" cy="19" r="9" fill="#594d67"/>
+   <circle cx="17" cy="19" r="4" fill="#f5aec0" strokeWidth="1.5"/><circle cx="47" cy="19" r="4" fill="#f5aec0" strokeWidth="1.5"/>
+   <path d="M12 34Q12 17 32 17t20 17v5q-1 15-20 15-19 0-20-15Z" fill="#fffaf3"/>
+   <ellipse cx="23" cy="34" rx="7" ry="8" fill="#4a3e56" strokeWidth="1.5"/><ellipse cx="41" cy="34" rx="7" ry="8" fill="#4a3e56" strokeWidth="1.5"/>
+   <ellipse cx="23" cy="34" rx="2" ry="2.8" fill="#fff" stroke="none"/><ellipse cx="41" cy="34" rx="2" ry="2.8" fill="#fff" stroke="none"/>
+   <path d="M28 44q4 4 8 0" fill="none" strokeWidth="2"/>
+   <circle cx="17" cy="43" r="3.3" fill="#f39fbb" stroke="none"/><circle cx="47" cy="43" r="3.3" fill="#f39fbb" stroke="none"/>
+   <path d="M22 23q10-5 20 0" fill="none" stroke="#fff" strokeWidth="2"/>
+  </g>,
+  folder:<g stroke={outline} strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round">
+   <path d="M14 28 9 9q-1-4 4-4l17 14Zm36 0 5-19q1-4-4-4L34 19Z" fill="#f4a660"/>
+   <path d="M13 31q0-16 19-16t19 16v8q0 15-19 15-19 0-19-15Z" fill="#f8bd78"/>
+   <path d="M13 28 10 10l15 12m26 6 3-18-15 12" fill="#e88e4d" strokeWidth="2"/>
+   <path d="M19 43q5-9 13-3 8-6 13 3-4 10-13 9-9 1-13-9Z" fill="#fff6ea" strokeWidth="1.8"/>
+   <ellipse cx="24" cy="33" rx="2" ry="3" fill={outline} stroke="none"/><ellipse cx="40" cy="33" rx="2" ry="3" fill={outline} stroke="none"/>
+   <path d="m30 40 2 1.5 2-1.5" fill="none" strokeWidth="1.6"/>
+   <circle cx="18" cy="39" r="3" fill="#f39fbb" stroke="none"/><circle cx="46" cy="39" r="3" fill="#f39fbb" stroke="none"/>
+  </g>,
+  key:<g stroke={outline} strokeWidth="2.7" strokeLinecap="round" strokeLinejoin="round">
+   <circle cx="19" cy="19" r="8" fill="#c7c4d7"/><circle cx="45" cy="19" r="8" fill="#c7c4d7"/>
+   <circle cx="19" cy="19" r="3.7" fill="#f5b3bf" strokeWidth="1.5"/><circle cx="45" cy="19" r="3.7" fill="#f5b3bf" strokeWidth="1.5"/>
+   <path d="M13 33q0-16 19-16t19 16v6q0 15-19 15-19 0-19-15Z" fill="#e4e0e9"/>
+   <path d="M20 26q5-6 11-1 6-5 12 1" fill="#b7b1c7" strokeWidth="1.8"/>
+   <ellipse cx="24" cy="35" rx="2.2" ry="3" fill={outline} stroke="none"/><ellipse cx="40" cy="35" rx="2.2" ry="3" fill={outline} stroke="none"/>
+   <ellipse cx="32" cy="41" rx="7" ry="5" fill="#fff6ed" strokeWidth="1.6"/><path d="m30 39 2 1.5 2-1.5m-2 2v1m0 0q-3 2-5 0m5 0q3 2 5 0" fill="none" strokeWidth="1.5"/>
+   <circle cx="19" cy="42" r="3.4" fill="#f39fbb" stroke="none"/><circle cx="45" cy="42" r="3.4" fill="#f39fbb" stroke="none"/>
+  </g>
  };
- return <svg className="tile-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke={palette[kind]} strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">{shape[kind]}</svg>;
+ return <svg className="tile-icon animal-tile-icon" viewBox="0 0 64 64" aria-hidden="true">{face[kind]}</svg>;
 }
 function TinyIcon({kind}:{kind:Icon}){return <span className="mini-symbol"><TileIcon kind={kind}/></span>;}
 function PetPortraits({className=''}:{className?:string}) {
