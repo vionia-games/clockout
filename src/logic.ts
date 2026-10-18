@@ -33,7 +33,7 @@ function officeMound():Array<Omit<Tile,'kind'>> {
     // Four compact, irregular layers create the challenge through depth.
     // Card offsets remain within the occlusion radius, preserving the solution path.
     const shift=patterns[layer][i%8];
-    return {id:id++,layer,x:p.x+1+shift.x,y:p.y+shift.y};
+    return {id:id++,layer,x:p.x+1.5+shift.x,y:p.y+1+shift.y};
   }));
 }
 export function generateLevel(date:string,stage:number):Level {
@@ -42,8 +42,8 @@ export function generateLevel(date:string,stage:number):Level {
   let id=0;
   if(!hard){
     const positions:Array<Omit<Tile,'kind'>>=[];
-    for(let y=0;y<3;y++)for(let x=0;x<3;x++)positions.push({id:id++,layer:0,x,y});
-    for(let y=0;y<3;y++)for(let x=0;x<3;x++)positions.push({id:id++,layer:1,x:x+.1,y:y-.1});
+    for(let y=0;y<3;y++)for(let x=0;x<3;x++)positions.push({id:id++,layer:0,x:x+3.5,y:y+2.5});
+    for(let y=0;y<3;y++)for(let x=0;x<3;x++)positions.push({id:id++,layer:1,x:x+3.6,y:y+2.4});
     const kinds=ICONS.slice(0,3),assigned=new Map<number,Icon>(),solution:number[][]=[];
     for(const layer of [1,0]){
       const cards=shuffle(positions.filter(p=>p.layer===layer),rand);
@@ -51,7 +51,7 @@ export function generateLevel(date:string,stage:number):Level {
       cards.forEach((p,i)=>assigned.set(p.id,arrangement[i]));
       for(const icon of kinds)solution.push(cards.filter(p=>assigned.get(p.id)===icon).map(p=>p.id));
     }
-    return {stage,cols:3,rows:3,total:18,tiles:positions.map(p=>({...p,kind:assigned.get(p.id)!})),solution};
+    return {stage,cols:10,rows:8,total:18,tiles:positions.map(p=>({...p,kind:assigned.get(p.id)!})),solution};
   }
   const positions=officeMound();
   const assigned=new Map<number,Icon>(),solution:number[][]=[];
@@ -62,6 +62,6 @@ export function generateLevel(date:string,stage:number):Level {
       group.forEach(p=>assigned.set(p.id,kind));solution.push(group.map(p=>p.id));
     }
   }
-  return {stage,cols:10,rows:9,total:positions.length,tiles:positions.map(p=>({...p,kind:assigned.get(p.id)!})),solution};
+  return {stage,cols:11,rows:10,total:positions.length,tiles:positions.map(p=>({...p,kind:assigned.get(p.id)!})),solution};
 }
 export function formatTime(seconds:number):string {return `${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;}
