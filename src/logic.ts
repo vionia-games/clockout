@@ -1,5 +1,5 @@
 /** Reproducible puzzle layouts. All art and UI are original. */
-export const ICONS = ['coffee', 'headphones', 'bag', 'phone', 'moon', 'star', 'clock', 'note', 'key'] as const;
+export const ICONS = ['coffee', 'headphones', 'bag', 'phone', 'bus', 'laptop', 'clock', 'folder', 'key'] as const;
 export type Icon = typeof ICONS[number];
 export interface Tile { id: number; kind: Icon; layer: number; x: number; y: number; }
 export interface Level { stage: number; cols: number; rows: number; total: number; tiles: Tile[]; solution: number[][]; }
