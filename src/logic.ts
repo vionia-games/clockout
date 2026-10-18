@@ -31,12 +31,14 @@ function officeMound():Array<Omit<Tile,'kind'>> {
   const base=FILE_MOUND;
   const middle=[...base,...SIDE_FILES];
   const top=TOP_FILES;
-  let id=0;
-  return [
-    ...base.map(p=>({id:id++,layer:0,x:p.x+2,y:p.y})),
-    ...middle.map(p=>({id:id++,layer:1,x:p.x+2.12,y:p.y-.12})),
-    ...top.map(p=>({id:id++,layer:2,x:p.x+2.24,y:p.y-.24}))
-  ];
+  const offsets=[{x:0,y:0},{x:.32,y:0},{x:0,y:.32},{x:-.32,y:.32}];
+  const place=(points:Array<{x:number;y:number}>,layer:number,start:number)=>points.map((p,i)=>{
+    // Each layer alternates centered, side-shifted, and cross-staggered cards.
+    // The maximum inter-layer offset is under the .89 occlusion radius.
+    const shift=offsets[(i*3+layer)%offsets.length];
+    return {id:start+i,layer,x:p.x+2+shift.x,y:p.y+shift.y};
+  });
+  return [...place(base,0,0),...place(middle,1,base.length),...place(top,2,base.length+middle.length)];
 }
 export function generateLevel(date:string,stage:number):Level {
   const hard=stage===2;
