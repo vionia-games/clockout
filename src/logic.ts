@@ -64,6 +64,6 @@ export function generateLevel(date:string,stage:number):Level {
       group.forEach(p=>assigned.set(p.id,kind));solution.push(group.map(p=>p.id));
     }
   }
-  return {stage,cols:14,rows:9,total:positions.length,tiles:positions.map(p=>({...p,kind:assigned.get(p.id)!})),solution};
+  return {stage,cols:14,rows:8,total:positions.length,tiles:positions.map(p=>({...p,kind:assigned.get(p.id)!})),solution};
 }
 export function formatTime(seconds:number):string {return `${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;}
