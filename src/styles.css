@@ -129,3 +129,8 @@ body{background:#f4edff}
 @keyframes pet-pop{to{transform:translateY(-2px) scale(1.07)}}
 
 .tutorial-pals{justify-content:center;text-align:center}.tutorial-pals span{align-items:center;text-align:center}
+
+/* Better balance: a generous tutorial tile, compact card pitch, and a larger four-layer hard mound. */
+.board-field-easy{--tile-size:clamp(60px,16vw,72px);height:clamp(286px,81vw,351px)}
+.board-field:not(.board-field-easy){--tile-size:clamp(32px,9vw,38px);height:clamp(315px,90vw,390px);min-height:315px;max-height:390px}
+@media(max-width:360px){.board-field-easy{--tile-size:clamp(56px,16vw,64px)}.board-field:not(.board-field-easy){--tile-size:clamp(30px,8.8vw,34px);height:clamp(310px,91vw,350px);min-height:310px}}
