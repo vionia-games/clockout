@@ -25,7 +25,7 @@ const FILE_MOUND=readRows([
   '..######....',
   '...#######..'
 ]);
-const SIDE_FILES=[{x:-1,y:3},{x:-1,y:4},{x:-1,y:5},{x:12,y:2},{x:12,y:3},{x:12,y:4},{x:10,y:7},{x:11,y:7},{x:12,y:7}];
+const SIDE_FILES=[{x:-1,y:3},{x:-1,y:4},{x:-1,y:5},{x:10,y:2},{x:10,y:3},{x:10,y:4},{x:4,y:7},{x:5,y:7},{x:6,y:7}];
 const TOP_FILES=[...FILE_MOUND.slice(0,27),...SIDE_FILES.slice(0,9)];
 function officeMound():Array<Omit<Tile,'kind'>> {
   const base=FILE_MOUND;
