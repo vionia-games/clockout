@@ -41,7 +41,7 @@ for (const offsets of layerOffsets) {
   assert.ok(offsets.some(o => Math.abs(o.dx)<.05 && Math.abs(o.dy)>.1), 'some cards should shift vertically');
   assert.ok(offsets.some(o => Math.abs(o.dx)>.1 && Math.abs(o.dy)>.1), 'some cards should cross stagger');
 }
-const cells = hard.tiles.map(t => `${t.layer}:${Math.round(t.x)}:${Math.round(t.y)}`);
+const cells = hard.tiles.map(t => `${t.layer}:${t.x.toFixed(2)}:${t.y.toFixed(2)}`);
 assert.equal(new Set(cells).size, 135);
 const minX = Math.min(...hard.tiles.map(t => t.x)), maxX = Math.max(...hard.tiles.map(t => t.x));
 const minY = Math.min(...hard.tiles.map(t => t.y)), maxY = Math.max(...hard.tiles.map(t => t.y));
