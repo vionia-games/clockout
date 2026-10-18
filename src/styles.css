@@ -76,3 +76,47 @@ body{background:#f4edff}
 .challenge h1 span:first-child{color:#a36bc9;text-shadow:0 2px 0 #fff}
 .stage-strip{border-radius:15px;background:#fff9;padding:7px 9px;box-shadow:inset 0 0 0 1px #eadcf1}
 @media(max-width:360px){.challenge{padding:10px 9px 11px}.challenge-badge{font-size:9px}}
+
+/* Warm, character-led home screen: lavender paper, strawberry accents, and two original pet mascots. */
+:root{color:#4a345f;background:#f4edff}
+.app-page{background:radial-gradient(ellipse at 8% 5%,#ffe1ef 0,transparent 31%),radial-gradient(ellipse at 95% 28%,#e4dcff 0,transparent 34%),linear-gradient(160deg,#f7efff,#efe8ff 55%,#fff1ea);padding-top:12px}
+.topbar{color:#644476;border:1px solid #fff;border-radius:20px;background:linear-gradient(125deg,#fffdf9e8,#f9eaffed);box-shadow:0 4px 0 #d8c6ec,0 8px 18px #9277ab22}
+.brand-mark{border:2px solid white;background:linear-gradient(145deg,#ffc6d9,#c6a3fa);box-shadow:0 3px 0 #9476b5,0 5px 11px #76568b24}
+.brand-text b{color:#5e4275;text-shadow:0 1px #fff}
+.brand-text small{color:#a282b2}
+.help-button{border:1px solid #e5d2f4;background:linear-gradient(145deg,#fff,#ffe8f2);color:#795996;box-shadow:0 2px 0 #dec6eb}
+.challenge{padding:10px 13px 12px;border:1.5px solid #fff;background:linear-gradient(145deg,#fffdf9,#fff1f7 54%,#f2eaff);box-shadow:0 5px 0 #d7c3e8,0 9px 18px #80659024}
+.challenge:before{right:14px;top:60px;color:#f5c457}
+.mission-topline{display:flex;align-items:center;justify-content:center;gap:7px;min-height:45px;margin-bottom:1px}
+.challenge-badge{margin:0;padding:5px 9px;border-color:#ecdaf4;background:#fff;color:#906caa;box-shadow:0 2px 0 #e8d9f0}
+.challenge-badge b{background:#ffe5aa;color:#795832}
+.badge-spark{color:#f0ad53}
+.pet-portraits{display:block;width:99px;height:48px;overflow:visible;filter:drop-shadow(0 3px 1px #b79ac33d)}
+.challenge .date-ribbon{border:1px solid #efdaea;background:#fff8;color:#b47b9b}
+.challenge h1{color:#513a68;text-shadow:0 1px #fff}
+.challenge h1 span:first-child{color:#ab69aa;text-shadow:0 1px #fff}
+.challenge p{color:#8c739e}
+.stage-strip{border-color:#eadcf3;background:#fff9;box-shadow:inset 0 1px #fff}
+.stage-strip>span:not(.stage-connector):not(.timer){color:#a28bac}
+.stage-strip .active-stage{background:linear-gradient(110deg,#e8d4ff,#ffcbdc);color:#684477!important}
+.stage-connector{color:#bd9cce}
+.stage-strip .timer{color:#a478a3}
+.game-board-card{background:linear-gradient(155deg,#fffefa,#fff9ff);border-color:#fff;box-shadow:0 5px 0 #d9c7e7,0 9px 18px #79599522}
+.board-field{background-color:#fff8f7;background-image:radial-gradient(#eddcf0 1px,transparent 1px),linear-gradient(145deg,#fffaf6,#f5efff);border-color:#eadcf0}
+.decor{display:none}
+.board-level{color:#8652a5}
+.board-level em{background:#f1d9ff;color:#825d9b}
+.remaining{color:#a48da7}.remaining b{color:#a35db2}
+.tutorial-pals{display:flex;align-items:center;gap:8px;margin:1px 1px 8px;padding:6px 9px;border:1px solid #f0dced;border-radius:15px;background:linear-gradient(110deg,#fff7e6,#fff0f7 58%,#f5efff);box-shadow:0 2px 0 #ecd9eb}
+.tutorial-portraits{width:68px;height:36px;flex:0 0 auto;filter:drop-shadow(0 2px 1px #b89acb35)}
+.tutorial-pals span{display:flex;flex-direction:column;gap:2px;text-align:left;min-width:0}
+.tutorial-pals b{font-size:10px;color:#76508b}
+.tutorial-pals small{font-size:9px;color:#a180aa;white-space:nowrap}
+.tutorial-pals i{margin-left:auto;color:#f1b84d;font-style:normal;font-size:15px}
+.board-progress{color:#987eaa}.progress-track{background:#eee3f3}.progress-fill{background:linear-gradient(90deg,#bd8fea,#f1a1c3)}
+.tray-rail{border-color:#e8c4ed;background:linear-gradient(180deg,#dba9e8,#ac7bc9);box-shadow:0 4px 0 #89619f,inset 0 2px #fff6}
+.tray-slot{background:#fff9f0;border-color:#eddaeb;border-bottom-color:#cfb6d9}
+.powerups button{background:linear-gradient(180deg,#fff,#fff0f7);border-color:#efdbef;border-bottom-color:#d0b1db;color:#72517f;box-shadow:0 3px 8px #79599518}
+.power-icon{color:#bd79bb}
+.footline{color:#9f8bad}.footline button{color:#805f91}
+@media(max-width:360px){.mission-topline{gap:2px}.pet-portraits{width:84px}.challenge-badge{gap:4px;padding:4px 7px}.tutorial-pals{padding:5px 7px}.tutorial-portraits{width:59px}.tutorial-pals small{font-size:8px}}
