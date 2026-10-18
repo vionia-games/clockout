@@ -50,3 +50,10 @@ body{background:#f4edff}
 .primary{background:linear-gradient(90deg,#9871d5,#dc8db8);border-bottom-color:#8059a8}
 @media(max-width:360px){.board-field:not(.board-field-easy){--tile-size:20px}.board-field-easy{--tile-size:clamp(58px,20vw,70px)}.brand-mark{width:40px;height:40px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
+/* Keep the tutorial cards intentionally large after the shared board sizing rule. */
+.board-field-easy{--tile-size:clamp(68px,21vw,88px)}
+.tray-title{color:#fff}
+.tray-title span{color:#72558e}
+.tray-title small{color:#8c789e}
+@media(max-width:360px){.board-field-easy{--tile-size:clamp(58px,20vw,72px)}}
