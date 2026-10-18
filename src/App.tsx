@@ -90,7 +90,7 @@ export default class App extends React.Component<{},State>{
     <div className="stage-strip"><span className={s.stage===1?'active-stage':''}>01 <b>퇴근 준비</b></span><span className="stage-connector">···</span><span className={s.stage===2?'active-stage':''}>02 <b>야근 지옥</b></span><span className="timer">◷ {formatTime(s.seconds)}</span></div>
    </section>
    <section className="game-board-card" aria-label="블록 게임판">
-    <div className="board-meta"><span className="board-level">STAGE {s.stage} <em>{s.stage===1?'EASY · 3×3 × 2':'야근 지옥 · 파일 산'}</em></span><span className="remaining">남은 블록 <b>{s.tiles.length}</b></span></div>
+    <div className="board-meta"><span className="board-level">{s.stage===1?'1단계 · 퇴근 준비':'2단계 · 야근 지옥'} <em>{s.stage===1?'18장 · 3가지 그림':'135장 · 9가지 그림'}</em></span><span className="remaining">남은 블록 <b>{s.tiles.length}</b></span></div>
     <div className={`board-field ${s.stage===1?'board-field-easy':''}`}><span className="decor decor-a">✳</span><span className="decor decor-b">✦</span><span className="decor decor-c">✧</span>
      {s.tiles.map(t=>{const exposed=isFree(t,s.tiles);return <button type="button" key={t.id} data-tile-id={t.id} title={names[t.kind]} aria-label={`${names[t.kind]} 블록`} disabled={!exposed} onClick={()=>this.tap(t.id)} className={`tile ${exposed?'':'tile-covered'} ${s.hint.includes(t.id)?'tile-hint':''}`}
       style={{left:`${(t.x+.5)/s.level.cols*100}%`,top:`${(t.y+.5)/s.level.rows*100}%`,zIndex:10+t.layer}}><TileIcon kind={t.kind}/></button>;})}
