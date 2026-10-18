@@ -57,3 +57,22 @@ body{background:#f4edff}
 .tray-title span{color:#72558e}
 .tray-title small{color:#8c789e}
 @media(max-width:360px){.board-field-easy{--tile-size:clamp(58px,20vw,72px)}}
+
+/* Softer mascot-like top cards and a playful daily mission badge. */
+.topbar{padding:8px 11px;margin:0 0 10px;border:1px solid #ffffffa8;border-radius:20px;background:linear-gradient(135deg,#ffffff20,#d9c4ff20);box-shadow:inset 0 1px #ffffff55,0 5px 0 #15112635}
+.brand-mark{border:2px solid #fff8e5;border-radius:15px;background:linear-gradient(145deg,#fbe6a8,#f5a8be);box-shadow:0 3px 0 #765486,0 5px 12px #130e2633;transform:rotate(-5deg)}
+.brand-text b{letter-spacing:.03em;text-shadow:0 2px 0 #674b85}
+.help-button{border:1px solid #fff9;border-radius:14px;background:linear-gradient(145deg,#fff8df,#efc8f5);box-shadow:0 3px 0 #9876b0;color:#694884}
+.challenge{position:relative;isolation:isolate;overflow:hidden;padding:12px 13px 13px;border:1.5px solid #fff;border-radius:23px;background:linear-gradient(145deg,#fff9f2,#f4e9ff 58%,#ffeaf2);box-shadow:0 6px 0 #231a3a48,0 11px 22px #110d2533}
+.challenge:before,.challenge:after{position:absolute;z-index:-1;content:"✦";color:#f5bd58;text-shadow:0 2px 0 #fff;font-size:19px}
+.challenge:before{right:13px;top:12px;transform:rotate(12deg)}
+.challenge:after{right:45px;bottom:40px;color:#ee9fbe;font-size:12px}
+.challenge-badge{width:max-content;max-width:100%;display:flex;align-items:center;gap:6px;margin:0 auto 7px;padding:5px 10px;border:1px solid #ead6f5;border-radius:999px;background:#fffdf4;box-shadow:0 2px 0 #e8d6ef;color:#8765a0;font-size:10px;font-weight:850;letter-spacing:.04em}
+.challenge-badge b{padding:3px 7px;border-radius:999px;background:#ffe2a4;color:#795530;font-size:10px}
+.badge-spark{color:#efaa46;font-size:14px}
+.badge-dot{color:#ee9cba;font-size:7px}
+.challenge .date-ribbon{border:1px solid #e9d6f2;border-radius:999px;background:#fff9;padding:4px 10px;box-shadow:0 2px 0 #e6d8ed}
+.challenge h1{margin-top:8px;text-shadow:0 2px 0 #fff}
+.challenge h1 span:first-child{color:#a36bc9;text-shadow:0 2px 0 #fff}
+.stage-strip{border-radius:15px;background:#fff9;padding:7px 9px;box-shadow:inset 0 0 0 1px #eadcf1}
+@media(max-width:360px){.challenge{padding:10px 9px 11px}.challenge-badge{font-size:9px}}
