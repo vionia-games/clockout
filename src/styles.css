@@ -87,11 +87,11 @@ body{background:#f4edff}
 .help-button{border:1px solid #e5d2f4;background:linear-gradient(145deg,#fff,#ffe8f2);color:#795996;box-shadow:0 2px 0 #dec6eb}
 .challenge{padding:10px 13px 12px;border:1.5px solid #fff;background:linear-gradient(145deg,#fffdf9,#fff1f7 54%,#f2eaff);box-shadow:0 5px 0 #d7c3e8,0 9px 18px #80659024}
 .challenge:before{right:14px;top:60px;color:#f5c457}
-.mission-topline{display:flex;align-items:center;justify-content:center;gap:7px;min-height:45px;margin-bottom:1px}
+
 .challenge-badge{margin:0;padding:5px 9px;border-color:#ecdaf4;background:#fff;color:#906caa;box-shadow:0 2px 0 #e8d9f0}
 .challenge-badge b{background:#ffe5aa;color:#795832}
 .badge-spark{color:#f0ad53}
-.pet-portraits{display:block;width:99px;height:48px;overflow:visible;filter:drop-shadow(0 3px 1px #b79ac33d)}
+
 .challenge .date-ribbon{border:1px solid #efdaea;background:#fff8;color:#b47b9b}
 .challenge h1{color:#513a68;text-shadow:0 1px #fff}
 .challenge h1 span:first-child{color:#ab69aa;text-shadow:0 1px #fff}
@@ -108,7 +108,7 @@ body{background:#f4edff}
 .board-level em{background:#f1d9ff;color:#825d9b}
 .remaining{color:#a48da7}.remaining b{color:#a35db2}
 .tutorial-pals{display:flex;align-items:center;gap:8px;margin:1px 1px 8px;padding:6px 9px;border:1px solid #f0dced;border-radius:15px;background:linear-gradient(110deg,#fff7e6,#fff0f7 58%,#f5efff);box-shadow:0 2px 0 #ecd9eb}
-.tutorial-portraits{width:68px;height:36px;flex:0 0 auto;filter:drop-shadow(0 2px 1px #b89acb35)}
+
 .tutorial-pals span{display:flex;flex-direction:column;gap:2px;text-align:left;min-width:0}
 .tutorial-pals b{font-size:10px;color:#76508b}
 .tutorial-pals small{font-size:9px;color:#a180aa;white-space:nowrap}
@@ -119,7 +119,7 @@ body{background:#f4edff}
 .powerups button{background:linear-gradient(180deg,#fff,#fff0f7);border-color:#efdbef;border-bottom-color:#d0b1db;color:#72517f;box-shadow:0 3px 8px #79599518}
 .power-icon{color:#bd79bb}
 .footline{color:#9f8bad}.footline button{color:#805f91}
-@media(max-width:360px){.mission-topline{gap:2px}.pet-portraits{width:84px}.challenge-badge{gap:4px;padding:4px 7px}.tutorial-pals{padding:5px 7px}.tutorial-portraits{width:59px}.tutorial-pals small{font-size:8px}}
+@media(max-width:360px){.challenge-badge{gap:4px;padding:4px 7px}.tutorial-pals{padding:5px 7px}.tutorial-pals small{font-size:8px}}
 
 /* Distinct, rounded animal portraits for all tappable cards. */
 .animal-tile-icon{width:92%;height:92%;filter:drop-shadow(0 1.5px 1px #5c456524)}
@@ -127,3 +127,5 @@ body{background:#f4edff}
 .tile-covered .animal-tile-icon{filter:grayscale(.78) brightness(.84) drop-shadow(0 1px 0 #fff6);opacity:.82}
 .tile-hint .animal-tile-icon{animation:pet-pop .55s ease-in-out infinite alternate}
 @keyframes pet-pop{to{transform:translateY(-2px) scale(1.07)}}
+
+.tutorial-pals{justify-content:center;text-align:center}.tutorial-pals span{align-items:center;text-align:center}
