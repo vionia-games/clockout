@@ -35,7 +35,8 @@ function officeMound():Array<Omit<Tile,'kind'>> {
   const place=(points:Array<{x:number;y:number}>,layer:number,start:number)=>points.map((p,i)=>{
     // Each layer alternates centered, side-shifted, and cross-staggered cards.
     // The maximum inter-layer offset is under the .89 occlusion radius.
-    const shift=offsets[(i*3+(layer*(i%4===0?0:1)))%offsets.length];
+    const layerStep=i%4===0?0:i%4===1?1:2;
+    const shift=offsets[(i*3+layer*layerStep)%offsets.length];
     return {id:start+i,layer,x:p.x+2+shift.x,y:p.y+shift.y};
   });
   return [...place(base,0,0),...place(middle,1,base.length),...place(top,2,base.length+middle.length)];
