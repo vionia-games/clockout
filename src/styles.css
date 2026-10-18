@@ -120,3 +120,10 @@ body{background:#f4edff}
 .power-icon{color:#bd79bb}
 .footline{color:#9f8bad}.footline button{color:#805f91}
 @media(max-width:360px){.mission-topline{gap:2px}.pet-portraits{width:84px}.challenge-badge{gap:4px;padding:4px 7px}.tutorial-pals{padding:5px 7px}.tutorial-portraits{width:59px}.tutorial-pals small{font-size:8px}}
+
+/* Distinct, rounded animal portraits for all tappable cards. */
+.animal-tile-icon{width:92%;height:92%;filter:drop-shadow(0 1.5px 1px #5c456524)}
+.tile{background:linear-gradient(150deg,#fffefa 0%,#fff7f5 72%,#f4e9ff 100%)}
+.tile-covered .animal-tile-icon{filter:grayscale(.78) brightness(.84) drop-shadow(0 1px 0 #fff6);opacity:.82}
+.tile-hint .animal-tile-icon{animation:pet-pop .55s ease-in-out infinite alternate}
+@keyframes pet-pop{to{transform:translateY(-2px) scale(1.07)}}
