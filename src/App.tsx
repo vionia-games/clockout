@@ -16,8 +16,8 @@ function initial(day:string,stage=1,seconds=0,moves=0):State {
  const level=generateLevel(day,stage);
  return {day,stage,level,tiles:level.tiles,tray:[],matched:0,moves,seconds,status:'playing',history:[],hint:[],help:get(HELP_KEY)!=='yes',shuffled:false,record:Number(get(REC_PREFIX+day))||null};
 }
-const palette:Record<Icon,string>={coffee:'#bd87dd',headphones:'#8e8ae6',bag:'#e9a271',phone:'#75afd6',moon:'#ad91dd',star:'#f2bf63',clock:'#74b5a9',note:'#df9aaa',key:'#8db4ce'};
-const names:Record<Icon,string>={coffee:'커피',headphones:'헤드폰',bag:'가방',phone:'휴대폰',moon:'달',star:'별',clock:'시계',note:'메모',key:'열쇠'};
+const palette:Record<Icon,string>={coffee:'#bd87dd',headphones:'#8e8ae6',bag:'#e9a271',phone:'#75afd6',bus:'#6fa9cf',laptop:'#897de2',clock:'#74b5a9',folder:'#e69caf',key:'#8db4ce'};
+const names:Record<Icon,string>={coffee:'커피',headphones:'헤드폰',bag:'가방',phone:'휴대폰',bus:'버스',laptop:'노트북',clock:'알람시계',folder:'파일 폴더',key:'열쇠'};
 
 function TileIcon({kind}: {kind:Icon}){
  const shape:Record<Icon,React.ReactNode>={
@@ -25,10 +25,10 @@ function TileIcon({kind}: {kind:Icon}){
   headphones:<g><path d="M4.2 14V12a7.8 7.8 0 0 1 15.6 0v2"/><rect x="3.2" y="12.5" width="4.4" height="7.2" rx="2"/><rect x="16.4" y="12.5" width="4.4" height="7.2" rx="2"/></g>,
   bag:<g><rect x="4" y="8" width="16" height="13" rx="2.5"/><path d="M9 8V6a3 3 0 0 1 6 0v2M4 13h16M10 13v2h4v-2"/></g>,
   phone:<g><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10 5h4M11.5 18h1"/></g>,
-  moon:<path d="M20 15.4A8.4 8.4 0 0 1 8.6 4 8.5 8.5 0 1 0 20 15.4Z"/>,
-  star:<path d="m12 2.5 2.9 6 6.6 1-4.75 4.65 1.12 6.6L12 17.7l-5.87 3.05 1.12-6.6L2.5 9.5l6.6-1Z"/>,
-  clock:<g><circle cx="12" cy="12" r="9"/><path d="M12 6.4v6l4 2.5"/></g>,
-  note:<g><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></g>,
+  bus:<g><path d="M4 17V7q0-3 4-3h8q4 0 4 3v10H4Z" fill="#8fc9e9" stroke="#4c7898"/><path d="M7 7h10v5H7z" fill="#eafaff" stroke="#4c7898"/><path d="M9 8v3m6-3v3" stroke="#78badc"/><circle cx="8" cy="17" r="2" fill="#544765"/><circle cx="16" cy="17" r="2" fill="#544765"/><path d="M6 14h12" stroke="#fff"/></g>,
+  laptop:<g><rect x="5" y="4" width="14" height="12" rx="2" fill="#a99aea" stroke="#6d5ca5"/><rect x="7" y="6" width="10" height="8" rx="1" fill="#ddf5ff" stroke="#fff"/><path d="m3 19 2-3h14l2 3q0 1-2 1H5q-2 0-2-1Z" fill="#7971ba" stroke="#61558f"/><circle cx="12" cy="10" r="1" fill="#f5c962"/></g>,
+  clock:<g><path d="m7 4-2-2m14 2 2-2" stroke="#9c70b3" strokeWidth="2.5"/><circle cx="12" cy="13" r="8" fill="#ffdf7c" stroke="#b27a52"/><circle cx="9" cy="12" r=".8" fill="#57435e"/><circle cx="15" cy="12" r=".8" fill="#57435e"/><path d="M9 16q3 2 6 0M12 8v4l2 1" fill="none" stroke="#76516d" strokeWidth="1.4" strokeLinecap="round"/></g>,
+  folder:<g><path d="M3 7q0-2 2-2h5l2 2h7q2 0 2 2v9q0 2-2 2H5q-2 0-2-2Z" fill="#edacc3" stroke="#a9658f"/><path d="M4 10h16" stroke="#ffebf1" strokeWidth="2"/><path d="M7 13h9m-9 3h6" stroke="#b9789d"/></g>,
   key:<g><circle cx="8" cy="9" r="4"/><path d="m11 12 8 8M15 16l2.5-2.5M17 18l2.5-2.5"/></g>
  };
  return <svg className="tile-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke={palette[kind]} strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">{shape[kind]}</svg>;
