@@ -61,9 +61,13 @@ export default class App extends React.Component<{},State>{
  });
  private shuffle=()=>this.setState(s=>{
   if(s.status!=='playing'||s.shuffled)return null;
-  const kinds=s.tiles.map(t=>t.kind);
-  for(let i=kinds.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[kinds[i],kinds[j]]=[kinds[j],kinds[i]];}
-  return {tiles:s.tiles.map((t,i)=>({...t,kind:kinds[i]})),shuffled:true,hint:[],history:[]};
+  const tiles=s.tiles.map(t=>({...t}));
+  for(const layer of [...new Set(tiles.map(t=>t.layer))]){
+   const group=tiles.filter(t=>t.layer===layer),kinds=group.map(t=>t.kind);
+   for(let i=kinds.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[kinds[i],kinds[j]]=[kinds[j],kinds[i]];}
+   group.forEach((tile,i)=>{tile.kind=kinds[i];});
+  }
+  return {tiles,shuffled:true,hint:[],history:[]};
  });
  private hint=()=>this.setState(s=>{
   if(s.status!=='playing')return null;
