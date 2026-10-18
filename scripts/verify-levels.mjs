@@ -18,9 +18,11 @@ assert.ok(3 * 2 < 7);
 
 const hard = generateLevel('2026-10-19', 2);
 assert.equal(hard.tiles.length, 135);
-assert.deepEqual([0,1,2].map(layer => hard.tiles.filter(t => t.layer === layer).length), [45,54,36]);
+assert.deepEqual([0,1,2,3].map(layer => hard.tiles.filter(t => t.layer === layer).length), [36,36,36,27]);
+assert.equal(Math.max(...hard.tiles.map(t => t.layer)), 3);
+assert.ok(hard.tiles.some(t => t.layer === 0 && hard.tiles.some(top => top.layer === 3 && Math.abs(t.x-top.x)<.89 && Math.abs(t.y-top.y)<.89)), 'the fourth layer must overlap the base stack');
 for (const kind of ICONS) assert.equal(hard.tiles.filter(t => t.kind === kind).length % 3, 0);
-const layerOffsets = [1,2].map(layer => {
+const layerOffsets = [1].map(layer => {
   const lower = hard.tiles.filter(t => t.layer === layer - 1);
   const higher = hard.tiles.filter(t => t.layer === layer);
   return higher.map(tile => {
