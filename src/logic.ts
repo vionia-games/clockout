@@ -33,9 +33,9 @@ function officeMound():Array<Omit<Tile,'kind'>> {
   const top=TOP_FILES;
   let id=0;
   return [
-    ...base.map(p=>({id:id++,layer:0,x:p.x,y:p.y})),
-    ...middle.map(p=>({id:id++,layer:1,x:p.x+.12,y:p.y-.12})),
-    ...top.map(p=>({id:id++,layer:2,x:p.x+.24,y:p.y-.24}))
+    ...base.map(p=>({id:id++,layer:0,x:p.x+1,y:p.y})),
+    ...middle.map(p=>({id:id++,layer:1,x:p.x+1.12,y:p.y-.12})),
+    ...top.map(p=>({id:id++,layer:2,x:p.x+1.24,y:p.y-.24}))
   ];
 }
 export function generateLevel(date:string,stage:number):Level {
