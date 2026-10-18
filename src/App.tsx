@@ -16,7 +16,7 @@ function initial(day:string,stage=1,seconds=0,moves=0):State {
  const level=generateLevel(day,stage);
  return {day,stage,level,tiles:level.tiles,tray:[],matched:0,moves,seconds,status:'playing',history:[],hint:[],help:get(HELP_KEY)!=='yes',shuffled:false,record:Number(get(REC_PREFIX+day))||null};
 }
-const palette:Record<Icon,string>={coffee:'#bd87dd',headphones:'#8e8ae6',bag:'#e9a271',phone:'#75afd6',bus:'#6fa9cf',laptop:'#897de2',clock:'#74b5a9',folder:'#e69caf',key:'#8db4ce'};
+const palette:Record<Icon,string>={coffee:'#bd87dd',headphones:'#8e8ae6',bag:'#e9a271',phone:'#75afd6',bus:'#6fa9cf',laptop:'#897de2',clock:'#e89ab0',folder:'#e69caf',key:'#8db4ce'};
 const names:Record<Icon,string>={coffee:'커피',headphones:'헤드폰',bag:'가방',phone:'휴대폰',bus:'버스',laptop:'노트북',clock:'알람시계',folder:'파일 폴더',key:'열쇠'};
 
 function TileIcon({kind}: {kind:Icon}){
@@ -34,6 +34,26 @@ function TileIcon({kind}: {kind:Icon}){
  return <svg className="tile-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke={palette[kind]} strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">{shape[kind]}</svg>;
 }
 function TinyIcon({kind}:{kind:Icon}){return <span className="mini-symbol"><TileIcon kind={kind}/></span>;}
+function PetPortraits({className=''}:{className?:string}) {
+ return <svg className={className} viewBox="0 0 132 64" role="img" aria-label="고양이와 강아지 캐릭터">
+  <g stroke="#59436e" strokeWidth="2.6" strokeLinejoin="round" strokeLinecap="round">
+   <path d="M7 25 8 9l16 8q9-5 18 0l15-8 1 18q4 21-25 26Q5 50 7 25Z" fill="#ffdfb1"/>
+   <path d="M9 18 10 11l10 6m33 1-1-7-9 6" fill="#f4a6c2" strokeWidth="2"/>
+   <ellipse cx="22" cy="31" rx="2" ry="3" fill="#59436e" stroke="none"/><ellipse cx="43" cy="31" rx="2" ry="3" fill="#59436e" stroke="none"/>
+   <path d="m30 36 3 2 3-2m-3 2v3m0 0q-4 4-7 0m7 0q4 4 7 0" fill="none" strokeWidth="1.7"/>
+   <circle cx="16" cy="37" r="3.5" fill="#f39cb4" stroke="none"/><circle cx="49" cy="37" r="3.5" fill="#f39cb4" stroke="none"/>
+   <path d="m17 16 2-7q1-3 4-1l8 7m14 0 4-6q2-3 4 0l3 10" fill="#ffcf65"/>
+   <path d="M72 24q-1-14 11-17l9 8q9-4 17 0l10-8q12 5 11 21 4 23-29 24-30-1-29-28Z" fill="#d9c9f7"/>
+   <path d="M74 19q0-8 8-10l7 8m28 1 7-8q8 4 7 12" fill="#b39be1" strokeWidth="2"/>
+   <ellipse cx="87" cy="31" rx="2" ry="3" fill="#59436e" stroke="none"/><ellipse cx="107" cy="31" rx="2" ry="3" fill="#59436e" stroke="none"/>
+   <ellipse cx="97" cy="36" rx="6" ry="4.5" fill="#fff6ec" strokeWidth="1.5"/><path d="m95 34 2 1 2-1m-2 1v3m0 0q-3 3-5 0m5 0q3 3 5 0" fill="none" strokeWidth="1.5"/>
+   <circle cx="80" cy="37" r="3" fill="#ee9db5" stroke="none"/><circle cx="114" cy="37" r="3" fill="#ee9db5" stroke="none"/>
+   <path d="M38 8q7-6 13 0l-6 7q-6-1-7-7Z" fill="#ef82a9"/><circle cx="45" cy="9" r="1.5" fill="#fff" stroke="none"/>
+   <path d="m97 8 2-6 2 6 6 2-6 2-2 6-2-6-6-2 6-2Z" fill="#ffe17b" strokeWidth="1.7"/>
+  </g>
+ </svg>;
+}
+
 
 export default class App extends React.Component<{},State>{
  private ticker:ReturnType<typeof setInterval>|undefined;
@@ -86,12 +106,13 @@ export default class App extends React.Component<{},State>{
   const pct=Math.round(s.matched/s.level.total*100);
   return <main className="app-page"><div className="game-shell">
    <header className="topbar"><div className="brand"><span className="brand-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="25" r="15" fill="#fff2b8" stroke="#6b4a87" strokeWidth="3"/><path d="M16 8l3 5m13-5-3 5" stroke="#ffd76c" strokeWidth="4" strokeLinecap="round"/><circle cx="19" cy="23" r="1.7" fill="#513a70"/><circle cx="29" cy="23" r="1.7" fill="#513a70"/><path d="M19 29q5 5 10 0" fill="none" stroke="#ef879e" strokeWidth="2.5" strokeLinecap="round"/><path d="M33 29l8 4-5 5-7-5" fill="#f29a72" stroke="#6b4a87" strokeWidth="2"/><path d="M19 39l-5 5m13-5 4 5" stroke="#6b4a87" strokeWidth="3" strokeLinecap="round"/><path d="M36 18l5-3m-4 8 6 1" stroke="#ffbb54" strokeWidth="2.5" strokeLinecap="round"/></svg></span><span className="brand-text"><b>칼퇴하자!</b><small>CLOCK OUT!</small></span></div><button className="help-button" onClick={()=>this.setState({help:true})} aria-label="게임 방법 보기">?</button></header>
-   <section className="challenge"><div className="challenge-badge"><span className="badge-spark">✦</span><span>오늘의 미션</span><b>정시 퇴근 도전</b><span className="badge-dot">●</span></div><div className="date-ribbon">✧ {date} 오늘의 도전 ✧</div><h1>오늘은 <span>칼퇴할 수 있을까?</span></h1><p>같은 그림 3개를 모아 퇴근 준비 끝!</p>
+   <section className="challenge"><div className="mission-topline"><div className="challenge-badge"><span className="badge-spark">✦</span><span>오늘의 미션</span><b>정시 퇴근 도전</b></div><PetPortraits className="pet-portraits"/></div><div className="date-ribbon">✧ {date} 오늘의 도전 ✧</div><h1>오늘은 <span>칼퇴할 수 있을까?</span></h1><p>같은 그림 3개를 모아 퇴근 준비 끝!</p>
     <div className="stage-strip"><span className={s.stage===1?'active-stage':''}>01 <b>퇴근 준비</b></span><span className="stage-connector">···</span><span className={s.stage===2?'active-stage':''}>02 <b>야근 지옥</b></span><span className="timer">◷ {formatTime(s.seconds)}</span></div>
    </section>
    <section className="game-board-card" aria-label="블록 게임판">
     <div className="board-meta"><span className="board-level">{s.stage===1?'1단계 · 퇴근 준비':'2단계 · 야근 지옥'} <em>{s.stage===1?'18장 · 3가지 그림':'135장 · 9가지 그림'}</em></span><span className="remaining">남은 블록 <b>{s.tiles.length}</b></span></div>
-    <div className={`board-field ${s.stage===1?'board-field-easy':''}`}><span className="decor decor-a">✳</span><span className="decor decor-b">✦</span><span className="decor decor-c">✧</span>
+    {s.stage===1&&<div className="tutorial-pals"><PetPortraits className="tutorial-portraits"/><span><b>나비 & 몽이의 첫 미션</b><small>같은 그림 3장을 모아 퇴근 가방을 채워요!</small></span><i>✦</i></div>}
+    <div className={`board-field ${s.stage===1?'board-field-easy':''}`}>
      {s.tiles.map(t=>{const exposed=isFree(t,s.tiles);return <button type="button" key={t.id} data-tile-id={t.id} title={names[t.kind]} aria-label={`${names[t.kind]} 블록`} disabled={!exposed} onClick={()=>this.tap(t.id)} className={`tile ${exposed?'':'tile-covered'} ${s.hint.includes(t.id)?'tile-hint':''}`}
       style={{left:`${(t.x+.5)/s.level.cols*100}%`,top:`${(t.y+.5)/s.level.rows*100}%`,zIndex:10+t.layer}}><TileIcon kind={t.kind}/></button>;})}
     </div>
