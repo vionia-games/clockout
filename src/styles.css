@@ -138,3 +138,10 @@ body{background:#f4edff}
 /* Both stages use exactly the same physical card size. */
 .board-field,.board-field-easy{--tile-size:clamp(32px,9vw,38px)}
 @media(max-width:360px){.board-field,.board-field-easy{--tile-size:clamp(30px,8.8vw,32px)}}
+
+/* Lock one physical tile size across both stages; center the compact first-stage stack. */
+.game-board-card .board-field .tile{width:clamp(29px,7.6vw,33px);height:clamp(29px,7.6vw,33px)}
+@media(max-width:360px){.game-board-card .board-field .tile{width:clamp(25px,7.5vw,28px);height:clamp(25px,7.5vw,28px)}}
+/* A clear rim and underside make covered cards read as a lower layer. */
+.game-board-card .board-field .tile-covered{filter:none;opacity:1;background:linear-gradient(150deg,#e8dff0,#d8c9e4);border-color:#c6b5d1;border-bottom:5px solid #9c86aa;box-shadow:0 4px 0 #aa96b7,0 6px 9px #49375d35}
+.game-board-card .board-field .tile-covered .animal-tile-icon{filter:saturate(.78) brightness(.9) drop-shadow(0 1px 0 #fff8);opacity:.92}
