@@ -6,3 +6,47 @@
 .board-field-easy .tile{border-radius:10px;border-width:2px;border-bottom-width:4px;box-shadow:0 2px 0 #fff inset,2px 4px 2px #5b457d66}
 .board-field-easy .tile-covered{box-shadow:2px 4px 0 #69587888}
 @media(max-width:360px){.board-field-easy{--tile-size:clamp(60px,21vw,74px)}}
+/* V2 office-world art direction */
+:root{color:#3d3152;background:#f4edff}
+body{background:#f4edff}
+.app-page{padding:calc(12px + env(safe-area-inset-top)) 12px calc(22px + env(safe-area-inset-bottom));background:radial-gradient(ellipse at 5% 13%,#fff3d4 0,transparent 18%),radial-gradient(ellipse at 98% 34%,#f7d8ed 0,transparent 24%),linear-gradient(180deg,#eee5ff,#f8f3ff 58%,#e6dcf8);overflow-x:hidden}
+.game-shell{position:relative}
+.topbar{color:#4e3c69;margin:0 2px 9px}
+.brand-mark{width:44px;height:44px;border-radius:15px;background:linear-gradient(145deg,#fff4c8,#e5b8f4);box-shadow:0 4px 0 #b795d0,0 7px 13px #78579130;padding:2px}
+.brand-mark svg{width:100%;height:100%}
+.brand-text b{font-size:18px;color:#503a6b}.brand-text small{color:#967fae}
+.help-button{border:1px solid #d1bde4;background:#fff9;color:#7b5c9b;width:34px;height:34px}
+.challenge{color:#4b3b63}
+.date-ribbon{background:#fff9;border-color:#e5d8ee;color:#8a6ca3}
+.challenge h1{font-size:clamp(23px,6.7vw,30px);text-shadow:none;color:#48355f}
+.challenge h1 span:first-child{color:#a56bd0}
+.challenge p{color:#806d91}
+.stage-strip{background:#fff9;border-color:#dfd0ef;box-shadow:0 3px 0 #d6c5e8}
+.stage-strip>span:not(.stage-connector):not(.timer){color:#9a8aa8}
+.stage-strip .active-stage{background:linear-gradient(90deg,#c8a0ef,#f3b7d0);color:#49345f!important}
+.stage-strip .timer{color:#6a4d84}
+.game-board-card{background:linear-gradient(155deg,#fffefa,#fff8ff);border-color:#fff;box-shadow:0 6px 0 #c9b4df,0 12px 25px #69517c20}
+.board-field{background-color:#f0e7fb;background-image:radial-gradient(#dac8eb 1px,transparent 1px),linear-gradient(135deg,#faf5ff,#eee3fa);border:1px solid #e5d7f0;--tile-size:clamp(20px,6.5vw,28px);height:clamp(286px,81vw,351px);max-height:none}
+.board-field-easy{height:clamp(286px,81vw,351px)}
+.tile{border:1.5px solid #c8b1dd;border-bottom:4px solid #987eb1;border-radius:8px;background:linear-gradient(145deg,#fff,#fffaf1);box-shadow:0 2px 0 #fff inset,0 4px 5px #60497536}
+.tile-covered{background:linear-gradient(145deg,#cdbfda,#ded3e6);border-color:#aa98b9;border-bottom-color:#8f7b9f;filter:grayscale(.45);opacity:.94;box-shadow:0 3px 0 #77658888}
+.tile-covered .tile-icon{opacity:.46}
+.board-level{color:#745094}.board-level em{background:#a984cd}.remaining{color:#9788a1}
+.board-progress{color:#93839f}.progress-track{background:#e9d9f3}.progress-fill{background:linear-gradient(90deg,#a987eb,#f29fc6)}
+.tray-title{color:#fff8ff}
+.tray-title small{color:#dfcde9}
+.tray-title strong{color:#fff;background:#72558e}
+.tray-rail{border-color:#d7b6ed;background:linear-gradient(180deg,#a982c7,#775a93);box-shadow:0 5px 0 #594271,inset 0 2px #f5e5ff}
+.tray-slot{background:#f7effb;border-color:#d2bce1;border-bottom-color:#a68ab9}
+.tray-slot.filled{animation:slot-arrive .18s cubic-bezier(.2,.8,.2,1)}
+@keyframes slot-arrive{from{transform:translateY(-7px) scale(.82);opacity:.55}to{transform:translateY(0) scale(1);opacity:1}}
+.tray-title strong.danger{animation:warn-slot .36s ease-in-out infinite alternate}
+@keyframes warn-slot{to{transform:scale(1.1);background:#dc7188}}
+.powerups button{background:linear-gradient(180deg,#fff,#f0e3fb);border-color:#d4b8eb;border-bottom-color:#a17bc1;color:#63487a;min-height:58px;box-shadow:0 3px 9px #6c548020}
+.power-icon{color:#a273cf}
+.footline{color:#9b8bab}.footline button{color:#765b8c}
+.modal{border-color:#e9d9f5;box-shadow:0 20px 60px #33204455}
+.modal-art{filter:drop-shadow(0 4px 1px #e9d8f2)}
+.primary{background:linear-gradient(90deg,#9871d5,#dc8db8);border-bottom-color:#8059a8}
+@media(max-width:360px){.board-field:not(.board-field-easy){--tile-size:20px}.board-field-easy{--tile-size:clamp(58px,20vw,70px)}.brand-mark{width:40px;height:40px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
